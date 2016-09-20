@@ -4,9 +4,9 @@ var assert = require( 'assert' );
 
 describe( "Shopping Basket", function() {
 
-  // beforeEach(function(){
-  //   basket.empty();
-  // })
+  beforeEach(function(){
+    shoppingBasket.empty();
+  })
 
   it("should start empty", function(){
     assert.equal(0, shoppingBasket.items.length);
@@ -18,6 +18,7 @@ describe( "Shopping Basket", function() {
   })
 
   it("should be able to remove an item", function(){
+    shoppingBasket.add(shoppingItem.pasta);
     shoppingBasket.remove(shoppingItem.pasta);
     assert.equal(0, shoppingBasket.items.length);
   })
@@ -33,25 +34,41 @@ describe( "Shopping Basket", function() {
   })
 
   it("should be able to get shopping value", function(){
+    shoppingBasket.add(shoppingItem.pasta);
+    shoppingBasket.add(shoppingItem.pasta);
     assert.equal(3, shoppingBasket.total());
   })
 
   it("should be able to add different products", function(){
+    shoppingBasket.add(shoppingItem.pasta);
+    shoppingBasket.add(shoppingItem.pasta);
     shoppingBasket.add(shoppingItem.chocolate);
     assert.equal(4, shoppingBasket.total());
   })
 
   it("can apply discount if over 20", function(){
+    shoppingBasket.add(shoppingItem.pasta);
+    shoppingBasket.add(shoppingItem.pasta);
+    shoppingBasket.add(shoppingItem.chocolate);
     shoppingBasket.add(shoppingItem.caviar);
     assert.equal(18.9, shoppingBasket.total());
   })
 
-  it("can apply loyalty card discount", function(){
-    assert.equal(17.955, shoppingBasket.loyaltyDiscount(20));
+  it("can apply all discounts", function(){
+    shoppingBasket.add(shoppingItem.pasta);
+    shoppingBasket.add(shoppingItem.pasta);
+    shoppingBasket.add(shoppingItem.pasta);
+    shoppingBasket.add(shoppingItem.chocolate);
+    shoppingBasket.add(shoppingItem.caviar);
+    assert.equal(17.955, shoppingBasket.finalPrice());
   })
 
   it("can apply bogof, over 20 discount and loyalty card", function(){
-    assert.equal(18.525, shoppingBasket.applyBogof());
+    shoppingBasket.add(shoppingItem.pasta);
+    shoppingBasket.add(shoppingItem.pasta);
+    shoppingBasket.add(shoppingItem.chocolate);
+    shoppingBasket.add(shoppingItem.caviar);
+    assert.equal(18.525, shoppingBasket.finalPrice());
   })
 
 })

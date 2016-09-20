@@ -32,17 +32,24 @@ var shoppingBasket = {
   return total
   },
 
-  loyaltyDiscount: function(discount){
-    var cost = this.total(); 
-    if (this.loyaltyCard === true){
-      cost = cost - (cost/discount);
-    }
-    return cost;
-  },
+  // over20Discount: function(){
+  //   var total = this.applyBogof();
+  //   if (total >= 20){
+  //     total = total - (total/10)
+  //   }
+  //   return total;
+  // },
 
-// the below function now does all the calculations as you need to apply bogofs first, before the other discounts. So could refactor to pull the other two discounts out of these and have it so you pass in the discount so it would be more easily updated.
+  // loyaltyDiscount: function(discount){
+  //   var cost = this.over20Discount(); 
+  //   if (this.loyaltyCard === true){
+  //     cost = cost - (cost/discount);
+  //   }
+  //   return cost;
+  // },
 
-  applyBogof: function(){
+
+  finalPrice: function(){
     var price = 0;
     var bogofItems = [];
     for (var shoppingItem of this.items){
